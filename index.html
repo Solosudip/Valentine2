@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nakali Will You Be My Valentine?</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ff69b4);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .box {
+    background: #fff0f5;
+    padding: 45px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
+    z-index: 2;
+  }
+
+  h1 {
+    color: #ff1493;
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+
+  button {
+    padding: 14px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  #yes {
+    background: #ff1493;
+    color: white;
+  }
+
+  #no {
+    background: #ffd1dc;
+    color: #333;
+    position: absolute;
+  }
+
+  #message {
+    margin-top: 25px;
+    font-size: 22px;
+    color: #ff1493;
+    font-weight: bold;
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 24px;
+    animation: float 6s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+  }
+
+  /* Confetti */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    animation: fall 3s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10px); }
+    100% { transform: translateY(100vh); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>Will you be my Valentine, Sanu? 💖</h1>
+
+  <button id="yes" onclick="yesClicked()">Yes 💕</button>
+  <button id="no" onmouseover="moveNo()">No 💔</button>
+
+  <div id="message"></div>
+</div>
+
+<script>
+  function yesClicked() {
+    document.getElementById("message").innerHTML =
+      "Yayyy!! 💖🥰 Happy Valentine’s Day, Sanu 🌹";
+
+    createConfetti();
+  }
+
+  function moveNo() {
+    const noBtn = document.getElementById("no");
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  // Floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }, 400);
+
+  // Confetti effect
+  function createConfetti() {
+    for (let i = 0; i < 80; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.background =
+        ["#ff1493", "#ff69b4", "#ffc0cb"][Math.floor(Math.random() * 3)];
+      confetti.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
